@@ -10,7 +10,7 @@ from motor import Ordinary_Car
 # Crear instancia del coche
 car = Ordinary_Car()
 
-HOST = "172.24.72.204"  # IP de tu Raspberry
+HOST = "10.131.111.204"  # IP de tu Raspberry
 PORT = 65432
 
 start_time = None       # Momento en que empezó a moverse
@@ -73,7 +73,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                             response = f"Stopping,{distance:.2f},{total_distance:.2f},{get_raspberry_temperature()}"
                             client.sendall(response.encode())
                         else:
-                            client.sendall(b"Stopping")
+                            response = f"Stopping,{0},{total_distance:.2f},{get_raspberry_temperature()}"
+                            client.sendall(response.encode())
                     else:
                         client.sendall(b"Unknown command")
 
